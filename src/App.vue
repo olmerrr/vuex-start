@@ -18,8 +18,7 @@ export default {
     TheCounter,
     ChangeCounter,
     FavoriteValue,
-
-},
+  },
 };
 </script>
 

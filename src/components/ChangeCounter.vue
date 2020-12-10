@@ -17,11 +17,11 @@ export default {
   },
    increase() {
       // this.$store.commit('increase', { value: 10 });
-      this.$store.commit({
+      setTimeout(() =>   this.$store.dispatch({
         type: 'increase',
         value: 10
-      });
-  
+      })
+  ,2000)
   },
   },
 }
