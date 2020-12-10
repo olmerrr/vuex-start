@@ -1,6 +1,7 @@
 <template>
   <button @click="addOne">+</button>
   <button @click="delOne">-</button>
+  <button @click="increase">Increase</button>
 
 </template>
 
@@ -12,6 +13,14 @@ export default {
   },
     delOne() {
       this.$store.commit('decrement');
+  
+  },
+   increase() {
+      // this.$store.commit('increase', { value: 10 });
+      this.$store.commit({
+        type: 'increase',
+        value: 10
+      });
   
   },
   },
