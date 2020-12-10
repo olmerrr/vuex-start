@@ -8,6 +8,16 @@ const store = createStore({
       counter: 0
     };
   },
+  // после добавления mutations: я могу использовать метод .comit('название method')
+  mutations: {
+    increment(state){
+      state.counter = state.counter + 1;
+    },
+    decrement(state){
+      state.counter = state.counter - 1;
+    },
+    
+  },
 });
 
 const app = createApp(App);
