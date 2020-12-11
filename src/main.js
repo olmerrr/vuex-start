@@ -2,14 +2,13 @@ import { createApp } from 'vue';
 import {createStore} from 'vuex';
 
 import App from './App.vue';
-const store = createStore({
+
+const counterModule = {
   state() {
     return {
       counter: 0
     };
   },
-  isLoggedIn: false,
-  // после добавления mutations: я могу использовать метод .comit('название method')
   mutations: {
     increment(state){
       state.counter = state.counter + 1;
@@ -20,11 +19,6 @@ const store = createStore({
     increase(state, payload){
       state.counter = state.counter + payload.value;
     },
-    setAuth(state, payload) {
-      console.log(payload);
-      state.isLoggedIn = payload.isAuth;
-    },
-    
   },
   actions: {
     increment(context) {
@@ -41,13 +35,7 @@ const store = createStore({
       // console.log(context);
       context.commit('increase', payload);
     },
-    login(context) {
-      context.commit('setAuth', { isAuth: true });
-    },
-    logout(context) {
-      context.commit('setAuth', { isAuth: false });
-    },
-  },
+ },
   getters: {
     finalCounter(state) {
       return state.counter * 3;
@@ -62,10 +50,37 @@ const store = createStore({
       }
         return finalCounter;
     },
+  },
+};
+const store = createStore({
+  modules: {
+    numbers: counterModule
+  },
+  state() {
+    return {
+      isLoggedIn: false,
+    };
+  },
+  // после добавления mutations: я могу использовать метод .comit('название method')
+  mutations: {
+    setAuth(state, payload) {
+      console.log(payload);
+      state.isLoggedIn = payload.isAuth;
+    },
+  },
+  actions: {
+    login(context) {
+      context.commit('setAuth', { isAuth: true });
+    },
+    logout(context) {
+      context.commit('setAuth', { isAuth: false });
+    },
+ 
+  },
+  getters: {
     userIsAutenticate(state) {
       return state.isLoggedIn;
     },
-
   },
 });
 
