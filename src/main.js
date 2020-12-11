@@ -8,6 +8,7 @@ const store = createStore({
       counter: 0
     };
   },
+  isLoggedIn: false,
   // после добавления mutations: я могу использовать метод .comit('название method')
   mutations: {
     increment(state){
@@ -18,6 +19,10 @@ const store = createStore({
     },
     increase(state, payload){
       state.counter = state.counter + payload.value;
+    },
+    setAuth(state, payload) {
+      console.log(payload);
+      state.isLoggedIn = payload.isAuth;
     },
     
   },
@@ -36,6 +41,12 @@ const store = createStore({
       // console.log(context);
       context.commit('increase', payload);
     },
+    login(context) {
+      context.commit('setAuth', { isAuth: true });
+    },
+    logout(context) {
+      context.commit('setAuth', { isAuth: false });
+    },
   },
   getters: {
     finalCounter(state) {
@@ -51,6 +62,10 @@ const store = createStore({
       }
         return finalCounter;
     },
+    userIsAutenticate(state) {
+      return state.isLoggedIn;
+    },
+
   },
 });
 
